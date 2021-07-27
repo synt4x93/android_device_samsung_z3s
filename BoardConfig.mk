@@ -13,28 +13,26 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-include device/samsung/exynos990-common/BoardConfigPlatform.mk
+## Inherit from the common tree
+include device/samsung/exynos990-common/BoardConfigCommon.mk
+
+## Inherit from the proprietary configuration
 include vendor/samsung/z3s/BoardConfigVendor.mk
 
 DEVICE_PATH := device/samsung/z3s
 
-PRODUCT_PLATFORM := exynos990
-
-# APEX image
+## APEX image
 DEXPREOPT_GENERATE_APEX_IMAGE := true
 
 TARGET_OTA_ASSERT_DEVICE := z3s
 
-TARGET_SPECIFIC_HEADER_PATH += $(DEVICE_PATH)/hardware/include
+TARGET_SPECIFIC_HEADER_PATH += $(DEVICE_PATH)/include
 
 ### DISPLAY
 TARGET_SCREEN_DENSITY := 640
 
+## Init
+TARGET_INIT_VENDOR_LIB := //$(DEVICE_PATH):libinit_z3s
+
 ### KERNEL
 TARGET_KERNEL_CONFIG := exynos9830-z3sxxx_defconfig
-
-### SYSTEM PROPS
-TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
-
-### VENDOR PROPS
-TARGET_VENDOR_PROP += $(DEVICE_PATH)/vendor.prop
